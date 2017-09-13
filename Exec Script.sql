@@ -1,5 +1,6 @@
-declare @result varchar(500)
+--declare @result varchar(500)
 
-EXEC ProductsWithSupplier @pid = 9, @supplyInfo = @result output
+--EXEC ProductsWithSupplier @pid = 9, @supplyInfo = @result output
 
-select @result
+--select @result
+
