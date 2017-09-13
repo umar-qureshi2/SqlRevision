@@ -73,7 +73,7 @@ GO
 IF type_id('[SupplierBasic]') IS NULL
 CREATE TYPE SupplierBasic AS TABLE
 (
-ContactName VARCHAR(50),
+CompanyName VARCHAR(50),
 City VARCHAR(50)
 )
 GO
@@ -86,8 +86,8 @@ CREATE PROCEDURE ImportBasicSuppliers
 @suppliers SupplierBasic READONLY
 AS
 BEGIN
-INSERT INTO Suppliers (ContactName,City)
-select ContactName, City from @suppliers
+INSERT INTO Suppliers (CompanyName,City)
+select * from @suppliers
 END
 Go
 
