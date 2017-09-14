@@ -76,6 +76,8 @@ CREATE TYPE SupplierBasic AS TABLE
 CompanyName VARCHAR(50),
 City VARCHAR(50)
 )
+ELSE
+DROP TYPE SupplierBasic
 GO
 
 
@@ -91,4 +93,20 @@ select * from @suppliers
 END
 Go
 
+DROP PROCEDURE IF EXISTS UpdateMergeSuppliers
+GO
+
+CREATE PROCEDURE UpdateMergeSuppliers
+@suppliers SupplierBasic READONLY
+AS
+BEGIN
+merge Suppliers AS s using @suppliers AS ss
+on s.CompanyName = ss.CompanyName
+When matched
+then
+update 
+set s.City = ss.City
+when not matched then insert (CompanyName, City) Values (ss.CompanyName,ss.City);
+END
+Go
 
